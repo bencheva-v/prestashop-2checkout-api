@@ -216,8 +216,7 @@ class Twocheckout extends PaymentModule
             $order_status = (int)Configuration::get('TWOCHECKOUT_ORDER_STATUS');
             $message = $charge['response']['responseMsg'];
             $this->validateOrder((int)$this->context->cart->id, _PS_OS_PAYMENT_, $charge['response']['total'], $this->displayName, $message, array(), null, false, $this->context->customer->secure_key);
-            Tools::redirect('index.php?controller=order-confirmation?key=' . $user->secure_key . '&id_cart=' . (int)
-                $cart->id . '&id_module=' . (int) $this->module->id . '&id_order=' . (int) $this->module->currentOrder);
+            Tools::redirect('index.php?controller=order-confirmation&id_cart='.(int)($cart->id).'&id_module='.(int)($this->id).'&id_order='.$this->currentOrder.'&key='.$user->secure_key);
         } else {
             $message = 'Payment Authorization Failed';
             Tools::redirect('index.php?controller=order&step=3&twocheckouterror='.$message);
